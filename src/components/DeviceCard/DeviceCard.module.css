@@ -3,6 +3,25 @@
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Two-column layout: left (headers + grid) and right (slider) */
+.twoCol {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+/* Left column holds InfoRow, TeamRoleRow, and action grid */
+.leftCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* InfoRow */
@@ -10,7 +29,6 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
 }
 
 .productIcon {
@@ -77,7 +95,6 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 12px;
   color: var(--text-secondary);
   flex-wrap: nowrap;
   overflow: hidden;
@@ -159,17 +176,6 @@
   height: 14px;
 }
 
-/* Card body — two-column layout below the status row */
-.cardBody {
-  display: flex;
-  gap: 10px;
-  align-items: stretch;
-}
-
-/* Left column: quick actions grid */
-.quickCol {
-  flex: 0 0 67%;
-}
 
 .quickGrid {
   display: grid;
@@ -186,31 +192,15 @@
   padding: 10px 6px 8px;
 }
 
-/* Right column: vertical slider */
+/* Right column: vertical slider — fixed width, spans full card height */
 .sliderCol {
-  flex: 1;
+  flex: 0 0 90px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.vertIcon {
-  color: rgba(255, 255, 255, 0.75);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.vertIcon svg {
-  width: 20px;
-  height: 20px;
 }
 
 .vertSlider {
   flex: 1;
-  width: 100%;
   position: relative;
   border-radius: 10px;
   background: var(--bg-elevated);
@@ -218,7 +208,6 @@
   cursor: ns-resize;
   user-select: none;
   touch-action: none;
-  min-height: 60px;
 }
 
 .vertFill {
@@ -229,11 +218,33 @@
   pointer-events: none;
 }
 
+/* Icon and value float inside the track */
+.vertIcon {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vertIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
 .vertValue {
-  font-size: 15px;
-  font-weight: 700;
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  font-weight: 800;
   color: var(--text-primary);
   font-family: Inter, sans-serif;
-  flex-shrink: 0;
   line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
 }

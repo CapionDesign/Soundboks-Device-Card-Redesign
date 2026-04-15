@@ -253,7 +253,6 @@ function VerticalSlider({ value, maxValue, fillStyle, icon, ariaLabel, onChange 
 
   return (
     <div className={styles.sliderCol}>
-      <div className={styles.vertIcon}>{icon}</div>
       <div
         ref={trackRef}
         className={styles.vertSlider}
@@ -271,8 +270,9 @@ function VerticalSlider({ value, maxValue, fillStyle, icon, ariaLabel, onChange 
           className={styles.vertFill}
           style={{ ...fillStyle, height: `${fillPct}%` }}
         />
+        <div className={styles.vertIcon}>{icon}</div>
+        <span className={styles.vertValue}>{value}</span>
       </div>
-      <span className={styles.vertValue}>{value}</span>
     </div>
   )
 }
@@ -294,14 +294,8 @@ export default function DeviceCard({ device }) {
     updateDevice(device.id, { level: newLevel })
   }
 
-  // Build quick action grid from feature flags — Settings always first
+  // Build quick action grid from feature flags — ··· More always last
   const actionButtons = [
-    {
-      id: 'settings',
-      icon: <GearIcon />,
-      label: 'Settings',
-      onPress: () => setSettingsOpen(true),
-    },
     {
       id: 'turnoff',
       icon: <PowerIcon />,
@@ -390,6 +384,14 @@ export default function DeviceCard({ device }) {
     })
   }
 
+  // ··· More — always last (opens device settings)
+  actionButtons.push({
+    id: 'more',
+    icon: <OverflowIcon />,
+    label: 'More',
+    onPress: () => setSettingsOpen(true),
+  })
+
   // Vertical slider config
   const palette  = palettes[device.paletteId ?? 0]
   const maxLevel = features.hasVolume ? 11 : 10
@@ -400,82 +402,76 @@ export default function DeviceCard({ device }) {
   return (
     <>
       <div className={styles.card}>
-        {/* 1. InfoRow — unchanged */}
-        <div className={styles.infoRow}>
-          <div className={styles.productIcon}>
-            {features.hasColorPalette ? <LightboksProductIcon /> : <SpeakerProductIcon />}
-          </div>
-          <div className={styles.deviceInfo}>
-            <span className={styles.deviceName}>{device.name}</span>
-            <span className={styles.deviceId}>#{device.id}</span>
-          </div>
-          <button
-            className={styles.overflowBtn}
-            onClick={() => setSettingsOpen(true)}
-            aria-label="Device settings"
-          >
-            <OverflowIcon />
-          </button>
-        </div>
+        <div className={styles.twoCol}>
+          {/* Left column: header rows + action grid */}
+          <div className={styles.leftCol}>
+            {/* InfoRow */}
+            <div className={styles.infoRow}>
+              <div className={styles.productIcon}>
+                {features.hasColorPalette ? <LightboksProductIcon /> : <SpeakerProductIcon />}
+              </div>
+              <div className={styles.deviceInfo}>
+                <span className={styles.deviceName}>{device.name}</span>
+                <span className={styles.deviceId}>#{device.id}</span>
+              </div>
+            </div>
 
-        {/* 2. TeamRoleRow — unchanged */}
-        {features.hasTeamUpRole && (
-          <div className={styles.teamRoleRow}>
-            <CircularArrowsIcon />
-            <TeamRolePill role={device.teamRole} />
+            {/* TeamRoleRow */}
+            {features.hasTeamUpRole && (
+              <div className={styles.teamRoleRow}>
+                <CircularArrowsIcon />
+                <TeamRolePill role={device.teamRole} />
 
-            {features.hasVolume && (
-              <>
-                <div className={styles.rowSep} />
-                <div className={styles.statusGroup}>
-                  <span className={styles.statusIcon}>
-                    {device.btConnected ? <BtOnIcon /> : <BtOffIcon />}
-                  </span>
-                  {device.skaaConnected && (
-                    <span className={styles.statusIcon}><SkaaIcon /></span>
-                  )}
-                  {device.auxConnected && (
-                    <span className={styles.statusItem}>
-                      <span className={styles.statusDot} />
-                      <span className={styles.statusLabel}>AUX</span>
-                    </span>
-                  )}
-                  {device.ch1Connected && (
-                    <span className={styles.statusItem}>
-                      <span className={styles.statusDot} />
-                      <span className={styles.statusLabel}>Ch1</span>
-                    </span>
-                  )}
-                  {device.ch2Connected && (
-                    <span className={styles.statusItem}>
-                      <span className={styles.statusDot} />
-                      <span className={styles.statusLabel}>Ch2</span>
-                    </span>
-                  )}
-                </div>
-                {features.hasStereoRole && device.stereoRole && (
+                {features.hasVolume && (
                   <>
                     <div className={styles.rowSep} />
-                    <span className={styles.stereoRole}>
-                      {device.stereoRole.charAt(0).toUpperCase()}
-                    </span>
+                    <div className={styles.statusGroup}>
+                      <span className={styles.statusIcon}>
+                        {device.btConnected ? <BtOnIcon /> : <BtOffIcon />}
+                      </span>
+                      {device.skaaConnected && (
+                        <span className={styles.statusIcon}><SkaaIcon /></span>
+                      )}
+                      {device.auxConnected && (
+                        <span className={styles.statusItem}>
+                          <span className={styles.statusDot} />
+                          <span className={styles.statusLabel}>AUX</span>
+                        </span>
+                      )}
+                      {device.ch1Connected && (
+                        <span className={styles.statusItem}>
+                          <span className={styles.statusDot} />
+                          <span className={styles.statusLabel}>Ch1</span>
+                        </span>
+                      )}
+                      {device.ch2Connected && (
+                        <span className={styles.statusItem}>
+                          <span className={styles.statusDot} />
+                          <span className={styles.statusLabel}>Ch2</span>
+                        </span>
+                      )}
+                    </div>
+                    {features.hasStereoRole && device.stereoRole && (
+                      <>
+                        <div className={styles.rowSep} />
+                        <span className={styles.stereoRole}>
+                          {device.stereoRole.charAt(0).toUpperCase()}
+                        </span>
+                      </>
+                    )}
                   </>
                 )}
-              </>
+
+                {features.hasBrightness && (
+                  <>
+                    <div className={styles.rowSep} />
+                    <span className={styles.energyIndicator}><SparkleIcon /></span>
+                  </>
+                )}
+              </div>
             )}
 
-            {features.hasBrightness && (
-              <>
-                <div className={styles.rowSep} />
-                <span className={styles.energyIndicator}><SparkleIcon /></span>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* 3. Card body — quick grid (left) + vertical slider (right) */}
-        <div className={styles.cardBody}>
-          <div className={styles.quickCol}>
+            {/* Quick action grid */}
             <div className={styles.quickGrid}>
               {actionButtons.slice(0, 6).map(btn => (
                 <ActionButton
@@ -489,6 +485,7 @@ export default function DeviceCard({ device }) {
             </div>
           </div>
 
+          {/* Right column: slider spans full card height */}
           <VerticalSlider
             value={device.level ?? 0}
             maxValue={maxLevel}
@@ -499,7 +496,6 @@ export default function DeviceCard({ device }) {
           />
         </div>
 
-        {/* 4. FirmwareBanner */}
         {device.firmwareUpdate && <FirmwareBanner />}
       </div>
 
