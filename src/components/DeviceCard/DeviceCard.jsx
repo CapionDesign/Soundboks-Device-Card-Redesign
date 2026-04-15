@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import styles from './DeviceCard.module.css'
 import { useDevices } from '../../context/DeviceContext'
 import { PRODUCT_FEATURES } from '../../data/productFeatures'
-import HeroArea from '../HeroArea/HeroArea'
+import { palettes } from '../../data/palettes'
 import ActionButton from '../ActionButton/ActionButton'
 import TeamRolePill from '../TeamRolePill/TeamRolePill'
 import FirmwareBanner from '../FirmwareBanner/FirmwareBanner'
@@ -93,28 +93,6 @@ function CircularArrowsIcon() {
   )
 }
 
-// TODO: replace with assets/power-icon.svg
-function PowerIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 3v6" />
-      <path d="M18.36 7.64a9 9 0 1 1-12.73 0" />
-    </svg>
-  )
-}
-
-// TODO: replace with assets/teamup-icon.svg
-function TeamUpIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17 1l4 4-4 4" />
-      <path d="M3 11V9a4 4 0 0 1 4-4h14" />
-      <path d="M7 23l-4-4 4-4" />
-      <path d="M21 13v2a4 4 0 0 1-4 4H3" />
-    </svg>
-  )
-}
-
 // TODO: replace with assets/sparkle-icon.svg (Energy Level / BeatPad)
 function SparkleIcon() {
   return (
@@ -162,6 +140,143 @@ function SoundProfileIcon() {
   )
 }
 
+// TODO: replace with assets/power-icon.svg
+function PowerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3v6" />
+      <path d="M18.36 7.64a9 9 0 1 1-12.73 0" />
+    </svg>
+  )
+}
+
+// TODO: replace with assets/teamup-icon.svg
+function TeamUpIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17 1l4 4-4 4" />
+      <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+      <path d="M7 23l-4-4 4-4" />
+      <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+    </svg>
+  )
+}
+
+// TODO: replace with assets/gear-icon.svg
+function GearIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  )
+}
+
+// TODO: replace with assets/mirror-icon.svg
+function MirrorIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3v18" strokeDasharray="3 2" />
+      <path d="M4 7l4 5-4 5" />
+      <path d="M20 7l-4 5 4 5" />
+    </svg>
+  )
+}
+
+// TODO: replace with assets/stereo-icon.svg
+function StereoIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="8" width="7" height="9" rx="1.5" />
+      <rect x="15" y="8" width="7" height="9" rx="1.5" />
+      <line x1="9" y1="12.5" x2="15" y2="12.5" />
+    </svg>
+  )
+}
+
+// TODO: replace with assets/volume-icon.svg
+function VolumeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+      <path d="M19 5a9 9 0 0 1 0 14" />
+    </svg>
+  )
+}
+
+// TODO: replace with assets/sun-icon.svg
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+      <circle cx="12" cy="12" r="4" />
+      <line x1="12" y1="2"  x2="12" y2="5" />
+      <line x1="12" y1="19" x2="12" y2="22" />
+      <line x1="2"  y1="12" x2="5"  y2="12" />
+      <line x1="19" y1="12" x2="22" y2="12" />
+      <line x1="4.9"  y1="4.9"  x2="7.1"  y2="7.1" />
+      <line x1="16.9" y1="16.9" x2="19.1" y2="19.1" />
+      <line x1="4.9"  y1="19.1" x2="7.1"  y2="16.9" />
+      <line x1="16.9" y1="7.1"  x2="19.1" y2="4.9" />
+    </svg>
+  )
+}
+
+// ─── VerticalSlider ───────────────────────────────────────────────────────────
+
+function VerticalSlider({ value, maxValue, fillStyle, icon, ariaLabel, onChange }) {
+  const trackRef  = useRef(null)
+  const isDragging = useRef(false)
+
+  function levelFromClientY(clientY) {
+    const rect = trackRef.current.getBoundingClientRect()
+    const y    = Math.max(0, Math.min(clientY - rect.top, rect.height))
+    return Math.round(((rect.height - y) / rect.height) * maxValue)
+  }
+
+  function handlePointerDown(e) {
+    e.currentTarget.setPointerCapture(e.pointerId)
+    isDragging.current = true
+    onChange(levelFromClientY(e.clientY))
+  }
+
+  function handlePointerMove(e) {
+    if (!isDragging.current) return
+    onChange(levelFromClientY(e.clientY))
+  }
+
+  function handlePointerUp() {
+    isDragging.current = false
+  }
+
+  const fillPct = (value / maxValue) * 100
+
+  return (
+    <div className={styles.sliderCol}>
+      <div className={styles.vertIcon}>{icon}</div>
+      <div
+        ref={trackRef}
+        className={styles.vertSlider}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        role="slider"
+        aria-valuenow={value}
+        aria-valuemin={0}
+        aria-valuemax={maxValue}
+        aria-label={ariaLabel}
+      >
+        <div
+          className={styles.vertFill}
+          style={{ ...fillStyle, height: `${fillPct}%` }}
+        />
+      </div>
+      <span className={styles.vertValue}>{value}</span>
+    </div>
+  )
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function DeviceCard({ device }) {
@@ -179,35 +294,43 @@ export default function DeviceCard({ device }) {
     updateDevice(device.id, { level: newLevel })
   }
 
-  // Build action grid purely from feature flags — no per-product hardcoding
+  // Build quick action grid from feature flags — Settings always first
   const actionButtons = [
+    {
+      id: 'settings',
+      icon: <GearIcon />,
+      label: 'Settings',
+      onPress: () => setSettingsOpen(true),
+    },
     {
       id: 'turnoff',
       icon: <PowerIcon />,
       label: 'Turn off',
       onPress: () => confirm(`Turn off ${device.name}?`),
     },
-    {
-      id: 'teamup',
-      icon: <TeamUpIcon />,
-      label: 'TeamUp',
-      onPress: () => alert('TeamUp — coming soon'),
-    },
-    features.hasEnergyLevel
-      ? {
-          id: 'energy',
-          icon: <SparkleIcon />,
-          label: device.energyLevel || 'Energy',
-          onPress: () => setEnergyLevelOpen(true),
-        }
-      : {
-          id: 'soundprofile',
-          icon: <SoundProfileIcon />,
-          label: device.soundProfile || 'Profile',
-          onPress: () => setSoundProfileOpen(true),
-        },
   ]
 
+  // Speakers: Bass+ (sound profile sheet)
+  if (features.hasVolume) {
+    actionButtons.push({
+      id: 'bassplus',
+      icon: <SoundProfileIcon />,
+      label: 'Bass+',
+      onPress: () => setSoundProfileOpen(true),
+    })
+  }
+
+  // Lightboks: Energy Level
+  if (features.hasEnergyLevel) {
+    actionButtons.push({
+      id: 'energy',
+      icon: <SparkleIcon />,
+      label: device.energyLevel || 'Energy',
+      onPress: () => setEnergyLevelOpen(true),
+    })
+  }
+
+  // Lightboks: Color palette
   if (features.hasColorPalette) {
     actionButtons.push({
       id: 'color',
@@ -217,6 +340,7 @@ export default function DeviceCard({ device }) {
     })
   }
 
+  // Speakers: Pro Panel
   if (features.hasProPanel) {
     actionButtons.push({
       id: 'propanel',
@@ -226,7 +350,17 @@ export default function DeviceCard({ device }) {
     })
   }
 
-  // BeatPad added as 5th button for Lightboks (designer's call: keep Color + add BeatPad)
+  // Speakers: TeamUp button
+  if (features.hasTeamUpButton) {
+    actionButtons.push({
+      id: 'teamup',
+      icon: <TeamUpIcon />,
+      label: 'TeamUp',
+      onPress: () => alert('TeamUp — coming soon'),
+    })
+  }
+
+  // Lightboks: BeatPad
   if (features.hasBeatPad) {
     actionButtons.push({
       id: 'beatpad',
@@ -236,10 +370,37 @@ export default function DeviceCard({ device }) {
     })
   }
 
+  // Lightboks: Mirror (XY mirroring)
+  if (features.hasXYMirroring) {
+    actionButtons.push({
+      id: 'mirror',
+      icon: <MirrorIcon />,
+      label: 'Mirror',
+      onPress: () => alert('Mirror — coming soon'),
+    })
+  }
+
+  // Speakers: Stereo
+  if (features.hasStereoRole) {
+    actionButtons.push({
+      id: 'stereo',
+      icon: <StereoIcon />,
+      label: 'Stereo',
+      onPress: () => alert('Stereo — coming soon'),
+    })
+  }
+
+  // Vertical slider config
+  const palette  = palettes[device.paletteId ?? 0]
+  const maxLevel = features.hasVolume ? 11 : 10
+  const fillStyle = features.hasColorPalette
+    ? { background: `linear-gradient(to top, ${palette.colors[0]}, ${palette.colors[1]}, ${palette.colors[2]})` }
+    : { background: 'var(--accent-red)' }
+
   return (
     <>
       <div className={styles.card}>
-        {/* 1. InfoRow */}
+        {/* 1. InfoRow — unchanged */}
         <div className={styles.infoRow}>
           <div className={styles.productIcon}>
             {features.hasColorPalette ? <LightboksProductIcon /> : <SpeakerProductIcon />}
@@ -257,26 +418,22 @@ export default function DeviceCard({ device }) {
           </button>
         </div>
 
-        {/* 2. TeamRoleRow — role pill + product-specific status indicators */}
+        {/* 2. TeamRoleRow — unchanged */}
         {features.hasTeamUpRole && (
           <div className={styles.teamRoleRow}>
             <CircularArrowsIcon />
             <TeamRolePill role={device.teamRole} />
 
-            {/* Speaker status: BT · SKAA · AUX · Ch1 · Ch2 · Stereo role */}
             {features.hasVolume && (
               <>
                 <div className={styles.rowSep} />
                 <div className={styles.statusGroup}>
-                  {/* BT status */}
                   <span className={styles.statusIcon}>
                     {device.btConnected ? <BtOnIcon /> : <BtOffIcon />}
                   </span>
-                  {/* SKAA / wireless */}
                   {device.skaaConnected && (
                     <span className={styles.statusIcon}><SkaaIcon /></span>
                   )}
-                  {/* Input channel indicators */}
                   {device.auxConnected && (
                     <span className={styles.statusItem}>
                       <span className={styles.statusDot} />
@@ -296,7 +453,6 @@ export default function DeviceCard({ device }) {
                     </span>
                   )}
                 </div>
-                {/* Stereo role letter */}
                 {features.hasStereoRole && device.stereoRole && (
                   <>
                     <div className={styles.rowSep} />
@@ -308,7 +464,6 @@ export default function DeviceCard({ device }) {
               </>
             )}
 
-            {/* Lightboks: energy level sparkle indicator */}
             {features.hasBrightness && (
               <>
                 <div className={styles.rowSep} />
@@ -318,26 +473,33 @@ export default function DeviceCard({ device }) {
           </div>
         )}
 
-        {/* 3. HeroArea */}
-        <HeroArea
-          device={device}
-          features={features}
-          onLevelChange={handleLevelChange}
-        />
+        {/* 3. Card body — quick grid (left) + vertical slider (right) */}
+        <div className={styles.cardBody}>
+          <div className={styles.quickCol}>
+            <div className={styles.quickGrid}>
+              {actionButtons.slice(0, 6).map(btn => (
+                <ActionButton
+                  key={btn.id}
+                  icon={btn.icon}
+                  label={btn.label}
+                  onPress={btn.onPress}
+                  className={styles.quickTile}
+                />
+              ))}
+            </div>
+          </div>
 
-        {/* 4. ActionGrid */}
-        <div className={styles.actionGrid}>
-          {actionButtons.map(btn => (
-            <ActionButton
-              key={btn.id}
-              icon={btn.icon}
-              label={btn.label}
-              onPress={btn.onPress}
-            />
-          ))}
+          <VerticalSlider
+            value={device.level ?? 0}
+            maxValue={maxLevel}
+            fillStyle={fillStyle}
+            icon={features.hasColorPalette ? <SunIcon /> : <VolumeIcon />}
+            ariaLabel={features.hasColorPalette ? 'Brightness' : 'Volume'}
+            onChange={handleLevelChange}
+          />
         </div>
 
-        {/* 5. FirmwareBanner */}
+        {/* 4. FirmwareBanner */}
         {device.firmwareUpdate && <FirmwareBanner />}
       </div>
 
@@ -380,7 +542,7 @@ export default function DeviceCard({ device }) {
         </BottomSheet>
       )}
 
-      {!features.hasEnergyLevel && (
+      {features.hasVolume && (
         <BottomSheet
           visible={soundProfileOpen}
           onClose={() => setSoundProfileOpen(false)}

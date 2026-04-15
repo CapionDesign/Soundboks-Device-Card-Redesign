@@ -159,9 +159,81 @@
   height: 14px;
 }
 
-/* ActionGrid */
-.actionGrid {
+/* Card body — two-column layout below the status row */
+.cardBody {
   display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+/* Left column: quick actions grid */
+.quickCol {
+  flex: 0 0 67%;
+}
+
+.quickGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin-top: 0;
+}
+
+/* Square tile override applied on top of ActionButton.btn */
+.quickTile {
+  flex: none;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 10px 6px 8px;
+}
+
+/* Right column: vertical slider */
+.sliderCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.vertIcon {
+  color: rgba(255, 255, 255, 0.75);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.vertSlider {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+  cursor: ns-resize;
+  user-select: none;
+  touch-action: none;
+  min-height: 60px;
+}
+
+.vertFill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.vertValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: Inter, sans-serif;
+  flex-shrink: 0;
+  line-height: 1;
 }
