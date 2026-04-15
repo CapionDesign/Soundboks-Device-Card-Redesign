@@ -1,0 +1,38 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  flex: 1;
+  min-width: 0;
+}
+
+.left svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.upgrade {
+  background: none;
+  border: none;
+  color: var(--accent-red);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-family: Inter, sans-serif;
+  white-space: nowrap;
+  min-height: 44px;
+}

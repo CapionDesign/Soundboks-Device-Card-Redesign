@@ -1,0 +1,52 @@
+.slider {
+  position: relative;
+  height: 110px;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  overflow: hidden;       /* clips the fill to rounded corners */
+  cursor: ew-resize;
+  user-select: none;
+  touch-action: none;     /* required for pointer capture on mobile */
+  margin-bottom: 12px;
+}
+
+/* Colored fill — grows left-to-right */
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  /* border-radius handled by parent overflow: hidden */
+}
+
+/* Product icon — fixed on left, always visible */
+.iconLeft {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.iconLeft svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* Level number — fixed on right */
+.levelNumber {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}

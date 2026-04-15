@@ -1,0 +1,39 @@
+:root {
+  --bg-primary: #0D0D0D;
+  --bg-card: #1A1A1A;
+  --bg-elevated: #242424;
+  --bg-action-btn: #2A2A2A;
+  --accent-red: #E8192C;
+  --text-primary: #FFFFFF;
+  --text-secondary: #888888;
+  --text-tertiary: #555555;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-active: rgba(255, 255, 255, 0.2);
+}
+
+html, body {
+  height: 100%;
+  background: #0D0D0D;
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+}
+
+#root {
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+input[type=range] {
+  touch-action: none;
+}
