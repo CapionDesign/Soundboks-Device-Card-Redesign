@@ -402,23 +402,16 @@ export default function DeviceCard({ device }) {
   return (
     <>
       <div className={styles.card}>
-        <div className={styles.twoCol}>
-          {/* Left column: header rows + action grid */}
-          <div className={styles.leftCol}>
-            {/* InfoRow */}
-            <div className={styles.infoRow}>
-              <div className={styles.productIcon}>
-                {features.hasColorPalette ? <LightboksProductIcon /> : <SpeakerProductIcon />}
-              </div>
-              <div className={styles.deviceInfo}>
-                <span className={styles.deviceName}>{device.name}</span>
-                <span className={styles.deviceId}>#{device.id}</span>
-              </div>
-            </div>
+        {/* Header — full width, ID at top right */}
+        <div className={styles.infoRow}>
+          <div className={styles.productIcon}>
+            {features.hasColorPalette ? <LightboksProductIcon /> : <SpeakerProductIcon />}
+          </div>
+          <div className={styles.deviceInfo}>
+            <span className={styles.deviceName}>{device.name}</span>
 
-            {/* TeamRoleRow */}
             {features.hasTeamUpRole && (
-              <div className={styles.teamRoleRow}>
+              <div className={styles.audioSourceRow}>
                 <CircularArrowsIcon />
                 <TeamRolePill role={device.teamRole} />
 
@@ -470,22 +463,24 @@ export default function DeviceCard({ device }) {
                 )}
               </div>
             )}
+          </div>
+          <span className={styles.deviceId}>#{device.id}</span>
+        </div>
 
-            {/* Quick action grid */}
-            <div className={styles.quickGrid}>
-              {actionButtons.slice(0, 6).map(btn => (
-                <ActionButton
-                  key={btn.id}
-                  icon={btn.icon}
-                  label={btn.label}
-                  onPress={btn.onPress}
-                  className={styles.quickTile}
-                />
-              ))}
-            </div>
+        {/* Body — grid left, slider right (slider height = grid height only) */}
+        <div className={styles.cardBody}>
+          <div className={styles.quickGrid}>
+            {actionButtons.slice(0, 6).map(btn => (
+              <ActionButton
+                key={btn.id}
+                icon={btn.icon}
+                label={btn.label}
+                onPress={btn.onPress}
+                className={styles.quickTile}
+              />
+            ))}
           </div>
 
-          {/* Right column: slider spans full card height */}
           <VerticalSlider
             value={device.level ?? 0}
             maxValue={maxLevel}
